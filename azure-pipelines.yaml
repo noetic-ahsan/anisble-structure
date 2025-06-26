@@ -1,0 +1,37 @@
+trigger:
+- none # Replace 'main' with your branch name if different
+
+# pool:
+#   vmImage: 'ubuntu-latest' # Using an Ubuntu agent for Ansible
+
+pool:
+  name: Linux-Default
+  Demands:
+  - agent.name -equals LinuxAgent1
+  - agent.name -equals linuxagent2
+  - agent.name -equals linuxagent3
+  - agent.name -equals linuxagent4
+  - agent.name -equals linuxagent5
+  - agent.name -equals linuxagent6
+  - agent.name -equals linuxagent7
+  - agent.name -equals linuxagent8
+
+variables:
+  ANSIBLE_INVENTORY_FILE: 'dev-weu-inventory'
+  ANSIBLE_PLAYBOOK_FILE: 'dev-weu-site.yml'
+
+steps:
+# - task: UsePythonVersion@0
+#   inputs:
+#     versionSpec: '3.x'
+#     addToPath: true
+
+# - script: |
+#     python3 -m pip install --upgrade pip
+#     pip install ansible
+#   displayName: 'Install Ansible'
+
+- script: |
+    cd configuration_management/ansible/haproxy &&
+    ansible-playbook -i $(ANSIBLE_INVENTORY_FILE) $(ANSIBLE_PLAYBOOK_FILE)
+  displayName: 'Run Ansible Playbook'

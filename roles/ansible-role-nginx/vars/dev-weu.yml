@@ -1,0 +1,30 @@
+---
+
+http_port: "80"
+http_host: as2dev-eu.partnerlinq.cloud
+http_post_size: 300M
+
+nginx_http_vhost:
+ - name: mco-s2
+   address: 57.153.152.155
+   options: true
+ - name: cat-s1
+   address: 57.153.152.155
+   options: false
+
+https_port: "443 ssl"
+https_host: server_name as2dev-eu.partnerlinq.cloud
+ssl_cert: /etc/nginx/ssl/star.partnerlinq.cloud.pem
+ssl_key: /etc/nginx/ssl/star.partnerlinq.cloud.key
+https_post_size: 300M
+
+nginx_https_vhost:
+ - name: cat-s1
+   address: 57.153.152.155
+   options: false
+ - name: mco-s1
+   address: 57.153.152.155
+   options: true
+ - name: mco-s2
+   address: 57.153.152.155
+   options: true

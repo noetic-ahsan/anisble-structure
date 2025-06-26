@@ -1,0 +1,21 @@
+trigger:
+- none # Replace 'main' with your branch name if different
+
+pool:
+  name: Linux-Default
+  Demands:
+  - agent.name -equals LinuxAgent1
+  - agent.name -equals linuxagent2
+  - agent.name -equals linuxagent3
+  - agent.name -equals linuxagent4
+  - agent.name -equals linuxagent5
+  - agent.name -equals linuxagent6
+  - agent.name -equals linuxagent7
+  - agent.name -equals linuxagent8
+
+steps:
+
+- script: |
+    cd configuration_management/ansible/nginx &&
+    ansible-playbook -i dev-us-inventory dev-us-site.yml
+  displayName: 'Run Ansible Playbook'

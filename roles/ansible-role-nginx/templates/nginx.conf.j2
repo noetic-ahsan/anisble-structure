@@ -1,0 +1,42 @@
+server {
+    listen {{ http_port }};
+    server_name {{ http_host }};
+    client_max_body_size {{ http_post_size }};
+
+{% if nginx_http_vhost %}
+{% for vh in nginx_http_vhost %}
+    location /{{ vh.name }} {
+        proxy_pass http://{{ vh.address }}/{{ vh.name }};
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+{% if vh.options %}
+        client_max_body_size 300M;
+{% endif %}
+    }
+{% endfor %}
+{% endif %}
+
+}
+
+server {
+    listen {{ https_port }};
+    server_name {{ https_host }};
+    ssl_certificate {{ ssl_cert }};
+    ssl_certificate_key {{ ssl_key }};
+    client_max_body_size {{ https_post_size }};
+
+
+{% if nginx_https_vhost %}
+{% for vh in nginx_https_vhost %}
+    location /{{ vh.name }} {
+        proxy_pass http://{{ vh.address }}/{{ vh.name }};
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+{% if vh.options %}
+        client_max_body_size 300M;
+{% endif %}
+    }
+{% endfor %}
+{% endif %}
+
+}

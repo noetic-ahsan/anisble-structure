@@ -1,0 +1,4 @@
+[eastus]
+pl-prod-haproxy-vm-01 ansible_host=172.203.217.140 ansible_user=pl-admin
+pl-prod-haproxy-vm-02 ansible_host=48.217.186.44 ansible_user=pl-admin
+pl-prod-haproxy-vm-dr ansible_host=40.83.242.163 ansible_user=pl-admin

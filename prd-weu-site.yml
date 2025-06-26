@@ -1,0 +1,6 @@
+- hosts: westeu
+  become: true
+  vars_files:
+    - roles/ansible-role-nginx/vars/prd-weu.yml
+  roles:
+    - ansible-role-nginx

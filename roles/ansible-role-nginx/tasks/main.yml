@@ -1,0 +1,67 @@
+---
+- name: Ensure NGINX is installed.
+  package: name=nginx state=present
+
+- name: Enable and start NGINX service
+  service:
+    name: nginx
+    enabled: yes
+    state: started
+  when: ansible_os_family == 'Debian'
+
+- name: Copy Certificate
+  copy:
+    src: "plqcloudcert.pem"
+    dest: /etc/nginx/ssl/star.partnerlinq.cloud.pem
+    mode: '0644'
+  notify: restart nginx
+
+- name: Copy Certificate Key
+  copy:
+    src: "plqcloudcert.key"
+    dest: /etc/nginx/ssl/star.partnerlinq.cloud.key
+    mode: '0644'
+  notify: restart nginx
+
+
+- name: Remove existing healthcheck.conf symlink
+  file:
+    path: /etc/nginx/sites-enabled/healthcheck.conf
+    state: absent
+
+- name: Wait for 30 seconds
+  wait_for:
+    timeout: 30
+
+- name: Copy Nginx Configuration to sites-available
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/{{ http_host }}.conf
+    mode: '0644'
+  notify: restart nginx
+
+- name: Ensure symlink exists in sites-enabled for {{ http_host }}.conf
+  file:
+    src: /etc/nginx/sites-available/{{ http_host }}.conf
+    dest: /etc/nginx/sites-enabled/{{ http_host }}.conf
+    state: link
+    force: true
+
+
+- name: Test NGINX configuration syntax
+  command: nginx -t
+  register: nginx_config_test
+  changed_when: false
+  failed_when: nginx_config_test.rc != 0
+
+- name: Restore healthcheck.conf symlink
+  file:
+    src: /etc/nginx/sites-available/healthcheck.conf
+    dest: /etc/nginx/sites-enabled/healthcheck.conf
+    state: link
+
+- name: Ensure NGINX is started and enabled on boot.
+  service:
+    name: nginx
+    state: started
+    enabled: yes

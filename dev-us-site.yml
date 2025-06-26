@@ -1,0 +1,6 @@
+- hosts: eastus
+  become: true
+  vars_files:
+    - roles/ansible-role-nginx/vars/dev-us.yml
+  roles:
+    - ansible-role-nginx

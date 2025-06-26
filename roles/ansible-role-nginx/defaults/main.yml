@@ -1,0 +1,13 @@
+http_port: "80"
+http_host: as2dev-eu.partnerlinq.cloud
+http_post_size: 300M
+
+nginx_http_vhos: []
+
+https_port: "443 ssl"
+https_host: server_name as2dev-eu.partnerlinq.cloud
+ssl_cert: /etc/nginx/ssl/star.partnerlinq.cloud.pem
+ccl_key: /etc/nginx/ssl/star.partnerlinq.cloud.key
+https_post_size: 300M
+
+nginx_https_vhost: []

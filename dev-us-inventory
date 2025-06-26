@@ -1,0 +1,2 @@
+[eastus]
+pl-dev-haproxy-vm-01 ansible_host=20.106.187.109 ansible_user=pl-admin

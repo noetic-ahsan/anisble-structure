@@ -1,0 +1,93 @@
+---
+
+http_port: "80"
+http_host: as2dev-us.partnerlinq.cloud
+http_post_size: 300M
+
+nginx_http_vhost:
+ - name: dfp-s1
+   address: 52.152.198.5
+   options: false
+ - name: kfl-s1
+   address: 52.152.198.5
+   options: false
+ - name: mes-s1
+   address: 52.152.198.5
+   options: false
+ - name: mvt-s1
+   address: 52.152.198.5
+   options: false
+ - name: pt-s1
+   address: 52.152.198.5
+   options: true
+ - name: glws-s1
+   address: 4.255.20.110
+   options: false
+
+https_port: "443 ssl"
+https_host: server_name as2dev-us.partnerlinq.cloud
+ssl_cert: /etc/nginx/ssl/star.partnerlinq.cloud.pem
+ssl_key: /etc/nginx/ssl/star.partnerlinq.cloud.key
+https_post_size: 300M
+
+nginx_https_vhost:
+ - name: abb-s1
+   address: 52.152.198.5
+   options: false
+ - name: ag-s1
+   address: 4.255.20.110
+   options: false
+ - name: al-s1
+   address: 52.152.198.5
+   options: false
+ - name: brk-s1
+   address: 4.255.20.110
+   options: false
+ - name: bsn-s1
+   address: 4.255.20.110
+   options: false
+ - name: dfp-s1
+   address: 52.152.198.5
+   options: false
+ - name: dm-s1
+   address: 52.152.198.5
+   options: false
+ - name: gf-s1
+   address: 4.255.20.110
+   options: false
+ - name: glws-s1
+   address: 4.255.20.110
+   options: false
+ - name: jhf-s1
+   address: 52.152.198.5
+   options: false
+ - name: kfl-s1
+   address: 52.152.198.5
+   options: false
+ - name: lgp-s1
+   address: 4.255.20.110
+   options: false
+ - name: man-s1
+   address: 52.152.198.5
+   options: false
+ - name: mes-s1
+   address: 52.152.198.5
+   options: false
+ - name: mj-s1
+   address: 52.152.198.5
+   options: false
+ - name: mj-s2
+   address: 52.152.198.5
+   options: false
+ - name: mvt-s1
+   address: 52.152.198.5
+   options: false
+ - name: pt-s1
+   address: 52.152.198.5
+   options: true
+ - name: tyc-s1
+   address: 64.236.72.127
+   options: false
+ - name: werner-s1
+   address: 64.236.72.127
+   options: false
